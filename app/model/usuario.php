@@ -5,7 +5,7 @@
         private $connection;
 
         // Table
-        private $dbTable = "tab_usuario";
+        private $db_table = "tab_usuario";
 
         // Db connection
         public function __construct($db){
@@ -14,7 +14,7 @@
 
         // LOGIN - Verificar NOME e SENHA no banco
         public function Login($nome, $senha){
-            $sqlQuery = "SELECT * FROM ". $this->dbTable ." WHERE nome = :nome AND senha = :senha";
+            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE nome = :nome AND senha = :senha";
 
             $sqlQuery = $this->connection->prepare($sqlQuery);
 
@@ -37,5 +37,32 @@
                 return false;
             }
         }    
+
+        // CREATE - Criar registro
+        public function createUsuarios(){
+            $sqlQuery = "INSERT INTO
+                            ". $this->db_table ."
+                        SET 
+                            nome = :nome, 
+                            email = :email, 
+                            senha = :senha";
+        
+            $stmt = $this->connection->prepare($sqlQuery);
+        
+            // sanitize
+            $this->nome=htmlspecialchars(strip_tags($this->nome));
+            $this->email=htmlspecialchars(strip_tags($this->email));
+            $this->senha=htmlspecialchars(strip_tags($this->senha));
+        
+            // bind data
+            $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":email", $this->email);
+            $stmt->bindParam(":senha", $this->senha);
+        
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
     }
 ?>
