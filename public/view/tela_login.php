@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGC | Login </title>
+    <title>SGC | Login</title>
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- CSS only -->
@@ -20,7 +20,7 @@
                 <hr>
             </div>
         </div>
-        <form action="../app/logar.php" method="POST">
+        <form action="../../app/controller/logar.php" method="POST">
             <div class="row justify-content-center">
                 <div class="col-4">
                     <div class="form-group mb-2">
