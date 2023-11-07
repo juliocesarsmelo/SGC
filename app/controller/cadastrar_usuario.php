@@ -19,11 +19,12 @@ if(isset($_POST['cadastrar'])){
 
     // Receber Dados do Formulário 
     $nome = addslashes($_POST['nome']);
+    $cargo = addslashes($_POST['cargo']);
     $email = addslashes($_POST['email']);
     $senha = addslashes($_POST['senha']);
 
-    // Registrar Novo Sistema
-    if($usuario->RegistrarSistema($nome, $email, $senha)){
+    // Registrar novo Usuario
+    if($usuario->createUsuario($nome, $cargo, $email, $senha)){
         echo "<script>
                 alert('Cadastro realizado com sucesso!!!');
                 window.location.href='../public/tela_principal.php';

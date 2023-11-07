@@ -1,6 +1,11 @@
 <?php
     class Usuario{
 
+        private $nome;
+        private $cargo;
+        private $email;
+        private $senha;
+
         // Connection
         private $connection;
 
@@ -12,13 +17,13 @@
             $this->connection = $db;
         }
 
-        // LOGIN - Verificar NOME e SENHA no banco
-        public function Login($nome, $senha){
-            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE nome = :nome AND senha = :senha";
+        // LOGIN - Verificar E-MAIL e SENHA no banco
+        public function Login($email, $senha){
+            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE nome = :email AND senha = :senha";
 
             $sqlQuery = $this->connection->prepare($sqlQuery);
 
-            $sqlQuery->bindValue("nome", $nome);
+            $sqlQuery->bindValue("email", $email);
             $sqlQuery->bindValue("senha", $senha);
 
             $sqlQuery->execute();
@@ -26,7 +31,7 @@
             // Validar se os dados existem
             if($sqlQuery->rowCount() > 0){
                 $dado = $sqlQuery->fetch();
-                if($nome == $dado['nome'] && $senha == $dado['senha']){
+                if($email == $dado['email'] && $senha == $dado['senha']){
                     $_SESSION['id'] = $dado['id'];
                     $_SESSION['nome'] = $dado['nome'];
                     return true;
@@ -39,11 +44,12 @@
         }    
 
         // CREATE - Criar registro
-        public function createUsuarios(){
+        public function createUsuario(){
             $sqlQuery = "INSERT INTO
                             ". $this->db_table ."
                         SET 
                             nome = :nome, 
+                            cargo = :cargo, 
                             email = :email, 
                             senha = :senha";
         
@@ -51,11 +57,13 @@
         
             // sanitize
             $this->nome=htmlspecialchars(strip_tags($this->nome));
+            $this->cargo=htmlspecialchars(strip_tags($this->cargo));
             $this->email=htmlspecialchars(strip_tags($this->email));
             $this->senha=htmlspecialchars(strip_tags($this->senha));
         
             // bind data
             $stmt->bindParam(":nome", $this->nome);
+            $stmt->bindParam(":cargo", $this->cargo);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":senha", $this->senha);
         

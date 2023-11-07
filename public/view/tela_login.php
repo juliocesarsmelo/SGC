@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-4 mt-5 mb-4">
-                <h1>Acesse sua conta</h1>
+                <h1>SISTEMA DE GERENCIAMENTO DE CHAMADOS</h1>
                 <hr>
             </div>
         </div>
@@ -24,15 +24,13 @@
             <div class="row justify-content-center">
                 <div class="col-4">
                     <div class="form-group mb-2">
-                        <label for="email">E-mail</label>
-                        <input type="text" name="email" id="email" class="form-control">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="senha">Senha</label>
-                        <input type="password" name="senha" id="senha" class="form-control">
+                        <input type="password" name="senha" id="senha" class="form-control" placeholder="senha">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn btn-primary">Logar</button>
                 </div>
             </div>
         </form>
