@@ -24,7 +24,7 @@ if(isset($_POST['cadastrar'])){
     $senha = addslashes($_POST['senha']);
 
     // Registrar novo Usuario
-    if($usuario->createUsuario($nome, $cargo, $email, $senha)){
+    if($usuario->registrarUsuario($nome, $cargo, $email, $senha)){
         echo "<script>
                 alert('Cadastro realizado com sucesso!!!');
                 window.location.href='../public/tela_principal.php';

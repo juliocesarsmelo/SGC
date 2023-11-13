@@ -1,11 +1,6 @@
 <?php
     class Usuario{
 
-        private $nome;
-        private $cargo;
-        private $email;
-        private $senha;
-
         // Connection
         private $connection;
 
@@ -17,8 +12,50 @@
             $this->connection = $db;
         }
 
+        // CREATE - Criar registro
+        public function registrarUsuario($nome, $cargo, $email, $senha){
+            $sqlQuery = "INSERT INTO
+                            ". $this->db_table ."
+                        SET 
+                            nome = :nome, 
+                            cargo = :cargo, 
+                            email = :email, 
+                            senha = :senha";
+        
+            $stmt = $this->connection->prepare($sqlQuery);
+
+            // bind data
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":cargo", $cargo);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":senha", $senha);
+        
+            if($stmt->execute()){
+               return true;
+            }
+            return false;
+        }
+
+        // GET ALL - Pegar todos os registros
+        public function getAllUsuarios(){
+            $sqlQuery = " SELECT * FROM ".$this->db_table." ORDER BY id_usuario ASC";
+            $stmt = $this->connection->prepare($sqlQuery);
+            $stmt->execute();
+            $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dadosRetornados;
+        }
+
+        // GET single - Pegar registros únicos
+        public function getUsuario($valor){
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE nome = '%$valor%' ";
+            $stmt = $this->connection->prepare($sqlQuery);
+            $stmt->execute();
+            $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dadosRetornados;
+        }
+
         // LOGIN - Verificar E-MAIL e SENHA no banco
-        public function Login($email, $senha){
+        public function loginUsuario($email, $senha){
             $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE nome = :email AND senha = :senha";
 
             $sqlQuery = $this->connection->prepare($sqlQuery);
@@ -43,34 +80,5 @@
             }
         }    
 
-        // CREATE - Criar registro
-        public function createUsuario(){
-            $sqlQuery = "INSERT INTO
-                            ". $this->db_table ."
-                        SET 
-                            nome = :nome, 
-                            cargo = :cargo, 
-                            email = :email, 
-                            senha = :senha";
-        
-            $stmt = $this->connection->prepare($sqlQuery);
-        
-            // sanitize
-            $this->nome=htmlspecialchars(strip_tags($this->nome));
-            $this->cargo=htmlspecialchars(strip_tags($this->cargo));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->senha=htmlspecialchars(strip_tags($this->senha));
-        
-            // bind data
-            $stmt->bindParam(":nome", $this->nome);
-            $stmt->bindParam(":cargo", $this->cargo);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":senha", $this->senha);
-        
-            if($stmt->execute()){
-                return true;
-            }
-            return false;
-        }
     }
 ?>
