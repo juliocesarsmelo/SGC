@@ -46,8 +46,8 @@
         }
 
         // GET single - Pegar registros únicos
-        public function getUsuario($valor){
-            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE nome = '%$valor%' ";
+        public function getUsuario($nome, $id){
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE nome = ".$nome." OR id_usuario = ".$id;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@
             if($sqlQuery->rowCount() > 0){
                 $dado = $sqlQuery->fetch();
                 if($email == $dado['email'] && $senha == $dado['senha']){
-                    $_SESSION['id'] = $dado['id'];
+                    $_SESSION['id'] = $dado['id_usuario'];
                     $_SESSION['nome'] = $dado['nome'];
                     return true;
                 }else{
