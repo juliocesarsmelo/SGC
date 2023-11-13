@@ -3,7 +3,7 @@
 session_start();
 
 // Verificar se os dados estão chegando via POST do formulário
-if(isset($_POST['cadastrar'])){
+if(isset($_POST['cadastrar_usuario'])){
     // Incluindo arquivos
     include_once '../../config/database.php';
     include_once '../model/usuario.php';

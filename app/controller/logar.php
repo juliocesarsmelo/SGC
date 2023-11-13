@@ -23,7 +23,7 @@ if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) &
     $senha = addslashes($_POST['senha']);
 
     // Verificar login e existência de upload
-    if($usuario->login($email, $senha)){
+    if($usuario->loginUsuario($email, $senha)){
         header("Location: ../../public/view/tela_principal.php"); 
     }else{
         session_unset(); // remove todas as variáveis de sessão
