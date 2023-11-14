@@ -43,8 +43,8 @@
         }
 
         // GET ALL - Pegar todos os registros
-        public function getAllChamados(){
-            $sqlQuery = " SELECT * FROM ".$this->dbTable." ORDER BY data_cadastro DESC";
+        public function getAllChamados($id = null){
+            $sqlQuery = " SELECT * FROM ".$this->dbTable." WHERE id_usuario_solicitante = ".$id." OR id_usuario_atendente = ".$id;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
