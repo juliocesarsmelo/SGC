@@ -56,7 +56,7 @@
 
         // LOGIN - Verificar E-MAIL e SENHA no banco
         public function loginUsuario($email, $senha){
-            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE nome = :email AND senha = :senha";
+            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE email = :email AND senha = :senha";
 
             $sqlQuery = $this->connection->prepare($sqlQuery);
 

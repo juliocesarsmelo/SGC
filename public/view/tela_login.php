@@ -24,13 +24,13 @@
             <div class="row justify-content-center">
                 <div class="col-4">
                     <div class="form-group mb-2">
-                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
+                        <input type="email" name="email" class="form-control" placeholder="E-mail" required>
                     </div>
                     <div class="form-group mb-3">
-                        <input type="password" name="senha" id="senha" class="form-control" placeholder="senha">
+                        <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Logar</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
         </form>
