@@ -1,9 +1,9 @@
 <?php 
     class Database {
         private $host = "localhost";
-        private $database_name = "";
+        private $database_name = "db_sgc";
         private $username = "root";
-        private $password = "root";
+        private $password = "";
 
         public $conn;
 

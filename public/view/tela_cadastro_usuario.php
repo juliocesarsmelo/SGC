@@ -14,39 +14,41 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row ">
             <div class="col-6 mt-5 mb-5">
                 <h1>Cadastrar Conta</h1>
                 <hr>
             </div>
         </div>
-        <form action="../app/validação_cadastro.php" method="POST">
-            <div class="row justify-content-center">
-                <div class="col-3">
-                    <div class="form-group mb-4">
-                        <label for="nome">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control">
-                    </div>
+        <form action="../../app/controller/cadastrar_usuario.php" method="POST">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" name="nome" placeholder="Nome" required>
                 </div>
-                <div class="col-3">
-                    <div class="form-group mb-4">s
-                        <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email" class="form-control">
-                    </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" name="cargo" placeholder="Cargo" required>
                 </div>
-                <div class="col-3">
-                    <div class="form-group mb-4">
-                        <label for="senha">Senha</label>
-                        <input type="password" name="senha" id="senha" class="form-control">
-                    </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="E-mail" required>
                 </div>
-            </div>  
-            <div class="row justify-content-center">
-                <div class="col-6">
-                <button type="submit" name="cadastrar" class="btn btn-primary">Cadastrar</button><br><br><br><br>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="password" class="form-control" name="senha" placeholder="Senha" required>
                 </div>
-            </div> 
+            </div>
+            <button class="btn btn-primary" type="submit" name="cadastrar_usuario">Cadastrar</button>
         </form>
+        <div class="row justify-content-center">
+            <div class="col mt-5">
+                <hr>
+                <span>Retornar para tela de </span> <a href="../view/tela_login.php">login</a><br>
+            </div>
+        </div>
     </div>   
 </body>
 </html>

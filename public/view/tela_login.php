@@ -15,8 +15,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-4 mt-5 mb-4">
-                <h1>SISTEMA DE GERENCIAMENTO DE CHAMADOS</h1>
+            <div class="col-6 mt-5 mb-4">
+                <h1>SISTEMA DE GERENCIAMENTO DE CHAMADOS - SGC</h1>
                 <hr>
             </div>
         </div>
@@ -34,7 +34,14 @@
                 </div>
             </div>
         </form>
+        <div class="row justify-content-center">
+            <div class="col-4 mt-5">
+                <hr>
+                <span>Ainda não possui cadastro, </span> <a href="../view/tela_cadastro_usuario.php">cadastre-se</a><br>
+            </div>
+        </div>
     </div>
+    
 </body>
     <script src="../public/javascript/main.js"></script>
 </html>

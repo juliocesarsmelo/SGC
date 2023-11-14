@@ -27,18 +27,18 @@ if(isset($_POST['cadastrar_usuario'])){
     if($usuario->registrarUsuario($nome, $cargo, $email, $senha)){
         echo "<script>
                 alert('Cadastro realizado com sucesso!!!');
-                window.location.href='../public/tela_principal.php';
+                window.location.href='../../public/view/tela_login.php';
               </script>";
     }else{
         echo "<script>
                 alert('Não foi possível finalizar o cadastro. Tente outra vez 01 !!!');
-                window.location.href='../public/tela_cadastro_usuario.php';
+                window.location.href='../../public/view/tela_cadastro_usuario.php';
               </script>";
     }
 }else{
     echo "<script>
             alert('Não foi possível finalizar o cadastro. Tente outra vez 02 !!!');
-            window.location.href='../public/tela_cadastro_usuario.php';
+            window.location.href='../../public/view/tela_cadastro_usuario.php';
           </script>";
 }
 
