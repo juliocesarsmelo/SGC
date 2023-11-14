@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/11/2023 às 04:52
+-- Tempo de geração: 14/11/2023 às 17:36
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -38,6 +38,13 @@ CREATE TABLE `tab_chamado` (
   `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `tab_chamado`
+--
+
+INSERT INTO `tab_chamado` (`id_chamado`, `titulo`, `assunto`, `data_cadastro`, `gravidade`, `id_usuario_solicitante`, `id_usuario_atendente`, `id_status`) VALUES
+(1, 'Formatar Maquina', 'Formatar Maquina do setor A.', '2023-11-14 16:33:02', 1, 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,15 @@ CREATE TABLE `tab_status_chamado` (
   `id_status` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tab_status_chamado`
+--
+
+INSERT INTO `tab_status_chamado` (`id_status`, `descricao`) VALUES
+(1, 'Alta'),
+(2, 'Media'),
+(3, 'Baixa');
 
 -- --------------------------------------------------------
 
@@ -62,6 +78,14 @@ CREATE TABLE `tab_usuario` (
   `email` varchar(255) NOT NULL,
   `senha` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tab_usuario`
+--
+
+INSERT INTO `tab_usuario` (`id_usuario`, `nome`, `cargo`, `email`, `senha`) VALUES
+(1, 'julio cesar', 'DTI', 'juliocesar@gmail.com', 'teste123'),
+(2, 'Nome Teste', 'DTI', 'nometeste@gmail.com', 'teste123');
 
 --
 -- Índices para tabelas despejadas
@@ -93,19 +117,19 @@ ALTER TABLE `tab_usuario`
 -- AUTO_INCREMENT de tabela `tab_chamado`
 --
 ALTER TABLE `tab_chamado`
-  MODIFY `id_chamado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_chamado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tab_status_chamado`
 --
 ALTER TABLE `tab_status_chamado`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tab_usuario`
 --
 ALTER TABLE `tab_usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
