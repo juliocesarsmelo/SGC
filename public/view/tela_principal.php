@@ -80,7 +80,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-2 mb-4">
-                <a href="../public/tela_cadastro_periferico.php" class="btn btn-success">Novo chamado</a>
+                <a href="../view/tela_novo_chamado.php" class="btn btn-success">Novo chamado</a>
             </div>
             <div class="col-2 mb-4">
                 <a class="btn btn-secondary">Meus chamados</a>
@@ -134,9 +134,9 @@
                                 echo "<td>".$valor['assunto']."</td>";
                                 echo "<td>".$valor['data_cadastro']."</td>";
                                 echo "<td>".$valor['gravidade']."</td>";
-                                echo "<td>".$valor['id_usuario_solicitante']."</td>";
-                                echo "<td>".$valor['id_usuario_atendente']."</td>";
-                                echo "<td>".$valor['id_status']."</td>";
+                                echo "<td>".$valor['fk_usuario_solicitante']."</td>";
+                                echo "<td>".$valor['fk_usuario_atendente']."</td>";
+                                echo "<td>".$valor['fk_status']."</td>";
                                 echo "</tr>";
                             }
                         ?>

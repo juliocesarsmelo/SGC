@@ -13,7 +13,7 @@
         }
 
         // CREATE - Criar registro
-        public function registrarChamado($titulo, $assunto, $data_cadastro, $gravidade, $id_usuario_solicitante, $id_usuario_atendente, $id_status){
+        public function registrarChamado($titulo, $assunto, $data_cadastro, $gravidade, $fk_usuario_solicitante, $fk_usuario_atendente, $fk_status){
             $sqlQuery = "INSERT INTO
                             ". $this->dbTable ."
                         SET 
@@ -21,9 +21,9 @@
                             assunto = :assunto, 
                             data_cadastro = :data_cadastro, 
                             gravidade = :gravidade, 
-                            id_usuario_solicitante = :id_usuario_solicitante, 
-                            id_usuario_atendente = :id_usuario_atendente,
-                            id_status = :id_status";
+                            fk_usuario_solicitante = :fk_usuario_solicitante, 
+                            fk_usuario_atendente = :fk_usuario_atendente,
+                            fk_status = :fk_status";
         
             $stmt = $this->connection->prepare($sqlQuery);
 
@@ -32,9 +32,9 @@
             $stmt->bindParam(":assunto", $assunto);
             $stmt->bindParam(":data_cadastro", $data_cadastro);
             $stmt->bindParam(":gravidade", $gravidade);
-            $stmt->bindParam(":id_usuario_solicitante", $id_usuario_solicitante);
-            $stmt->bindParam(":id_usuario_atendente", $id_usuario_atendente);
-            $stmt->bindParam(":id_status", $id_status);
+            $stmt->bindParam(":fk_usuario_solicitante", $fk_usuario_solicitante);
+            $stmt->bindParam(":fk_usuario_atendente", $fk_usuario_atendente);
+            $stmt->bindParam(":fk_status", $fk_status);
         
             if($stmt->execute()){
                return true;
@@ -44,7 +44,7 @@
 
         // GET ALL - Pegar todos os registros
         public function getAllChamados($id = null){
-            $sqlQuery = " SELECT * FROM ".$this->dbTable." WHERE id_usuario_solicitante = ".$id." OR id_usuario_atendente = ".$id;
+            $sqlQuery = " SELECT * FROM ".$this->dbTable." WHERE fk_usuario_solicitante = ".$id." OR fk_usuario_atendente = ".$id;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
