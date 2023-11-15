@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-6 mt-5 mb-4">
+            <div class="col-8 mt-5 mb-4">
                 <h1>SISTEMA DE GERENCIAMENTO DE CHAMADOS - SGC</h1>
                 <hr>
             </div>

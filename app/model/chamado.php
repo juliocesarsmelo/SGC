@@ -5,7 +5,7 @@
         private $connection;
 
         // Table
-        private $dbTable = "tab_chamado";
+        private $db_table = "tab_chamado";
 
         // Db connection
         public function __construct($db){
@@ -15,7 +15,7 @@
         // CREATE - Criar registro
         public function registrarChamado($titulo, $assunto, $data_cadastro, $gravidade, $fk_usuario_solicitante, $fk_usuario_atendente, $fk_status){
             $sqlQuery = "INSERT INTO
-                            ". $this->dbTable ."
+                            ". $this->db_table ."
                         SET 
                             titulo = :titulo, 
                             assunto = :assunto, 
@@ -44,7 +44,7 @@
 
         // GET ALL - Pegar todos os registros
         public function getAllChamados($id = null){
-            $sqlQuery = " SELECT * FROM ".$this->dbTable." WHERE fk_usuario_solicitante = ".$id." OR fk_usuario_atendente = ".$id;
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE fk_usuario_solicitante = ".$id." OR fk_usuario_atendente = ".$id;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,11 +53,21 @@
 
         // GET single - Pegar registros únicos
         public function getChamado($valor){
-            $sqlQuery = " SELECT * FROM ".$this->dbTable." WHERE titulo LIKE '%$valor%' ";
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE titulo LIKE '%$valor%' ";
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dadosRetornados;
+        }
+
+        // DELETE - deletar um registro
+        public function deleteChamado($valor){
+            $sqlQuery = "DELETE FROM tab_chamado WHERE id_chamado = '$valor'";            
+            $stmt = $this->connection->prepare($sqlQuery);
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
         }
     }
 ?>

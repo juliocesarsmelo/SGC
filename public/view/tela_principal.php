@@ -29,31 +29,15 @@
         $chamadosRetornados = $chamado->getAllChamados($_SESSION['id']);
     }
 
-
-    // if(!empty($_GET['search_periferico'])){
-    //     $dadosPesquisa = $_GET['search_periferico'];
-    //     $sqlQuery = " SELECT * FROM periferico WHERE NOME LIKE '%$dadosPesquisa%' OR DATA_DA_INCLUSAO LIKE '%$dadosPesquisa%' OR FK_FUNCIONARIO LIKE '%$dadosPesquisa%' OR DESCRICAO LIKE '%$dadosPesquisa%' ORDER BY DATA_DA_INCLUSAO DESC";
-    //     $stmt = $db->prepare($sqlQuery);
-    //     $stmt->execute();
-    //     $dadosRetornadosPerifericos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }else{
-    //     $sqlQuery = " SELECT * FROM periferico ORDER BY DATA_DA_INCLUSAO DESC";
-    //     $stmt = $db->prepare($sqlQuery);
-    //     $stmt->execute();
-    //     $dadosRetornadosPerifericos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // if(!empty($_GET['delete_software'])){
-    //     $idSoftware = $_GET['delete_software'];
-    //     $sqlQuery = "DELETE FROM software WHERE ID = '$idSoftware'";
-    //     $stmt = $db->prepare($sqlQuery);
-    //     if($stmt->execute()){
-    //         echo "<script>
-    //                 alert('Exlusão do software ocorreu com sucesso!!!');
-    //                 window.location.href='../public/tela_principal.php';
-    //             </script>";
-    //     }
-    // }
+    if(!empty($_GET['delete_chamado'])){
+        $id_chamado = $_GET['delete_chamado'];
+        if($chamado->deleteChamado($id_chamado)){
+            echo "<script>
+                    alert('Exlusão do software ocorreu com sucesso!!!');
+                    window.location.href='./tela_principal.php';
+                </script>";
+        }
+    }  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -74,7 +58,7 @@
                 <h1>SISTEMA DE GERENCIAMENTO DE CHAMADO </h1>
             </div>
             <div class="col-1 mt-5 mb-4 d-flex align-items-center justify-content-end">
-                <a href="../../app/controller/logout.php" class="btn btn-danger">Logout</a>
+                <a href="../../app/controller/logout.php" class="btn btn-primary">Logout</a>
             </div>
             <hr>
         </div>
@@ -123,6 +107,8 @@
                             <th scope="col">Solicitante</th>
                             <th scope="col">Atendente</th>
                             <th scope="col">Status</th>
+                            <th scope="col">[Excluir]</th>
+                            <th scope="col">[Alterar]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,9 +120,11 @@
                                 echo "<td>".$valor['assunto']."</td>";
                                 echo "<td>".$valor['data_cadastro']."</td>";
                                 echo "<td>".$valor['gravidade']."</td>";
-                                echo "<td>".$valor['fk_usuario_solicitante']."</td>";
-                                echo "<td>".$valor['fk_usuario_atendente']."</td>";
-                                echo "<td>".$valor['fk_status']."</td>";
+                                echo "<td> Julio Cesar</td>";
+                                echo "<td> Nome Teste</td>";
+                                echo "<td> Criado</td>";
+                                echo "<td><button id='delete_chamado' onclick=\"deleteChamado('". $valor['id_chamado'] ."');\" class='btn btn-danger'>X</button></td>";
+                                echo "<td><button id='change_chamado' onclick=\"changeChamado('". $valor['id_chamado'] ."');\" class='btn btn-warning'>☼</button></td>";
                                 echo "</tr>";
                             }
                         ?>
@@ -148,6 +136,9 @@
 </body>
 <script>
     var search_chamado = document.getElementById('pesquisar_chamado');
+    var delete_chamado = document.getElementById('delete_chamado');
+    var change_chamado = document.getElementById('change_chamado');
+
 
     search_chamado.addEventListener("keydown", function(event){
         if(event.key === "Enter"){
@@ -155,8 +146,28 @@
         }
     });
 
+    delete_chamado.addEventListener("keydown", function(event){
+        if(event.key === "Enter"){
+            deleteChamado();
+        }
+    });
+
+    change_chamado.addEventListener("keydown", function(event){
+        if(event.key === "Enter"){
+            changeChamado();
+        }
+    });
+
     function searchData(){
         window.location = 'tela_principal.php?search_chamado=' + pesquisar_chamado.value;
+    }
+
+    function deleteChamado(id_chamado){
+        window.location = 'tela_principal.php?delete_chamado=' + id_chamado;
+    }
+
+    function changeChamado(id_chamado){
+        window.location = 'tela_atualiza_chamado.php?change_chamado=' + id_chamado;
     }
 </script>
 </html>

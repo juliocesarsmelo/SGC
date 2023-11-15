@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGC | Cadastrar Usuario</title>
+    <title>SGC | Cadastrar Usuário</title>
     <!-- CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- CSS only -->
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row ">
             <div class="col-6 mt-5 mb-5">
-                <h1>Cadastrar Conta</h1>
+                <h1>Cadastrar Usuário</h1>
                 <hr>
             </div>
         </div>
