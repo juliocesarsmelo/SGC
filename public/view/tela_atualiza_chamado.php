@@ -9,6 +9,20 @@
                 window.location.href='../view/tela_login.php';
                 </script>";
     }
+
+    include_once '../../config/database.php';
+    include_once '../../app/model/usuario.php';
+    include_once '../../app/model/chamado.php';
+    include_once '../../app/model/status_chamado.php';
+
+    $database = new Database();
+    $db = $database->getConnection();
+
+    $usuario = new Usuario($db);
+    $chamado = new Chamado($db); 
+    $status_chamado = new StatusChamado($db); 
+
+    $chamadoRetornado = $chamado->getChamadoId($_GET['change_chamado']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,43 +44,38 @@
                 <hr>
             </div>
         </div>
-        <form action="../../app/controller/cadastrar_chamado.php" method="POST">
-            <div class="form-row">
+        <form action="../../app/controller/alterar_chamado.php" method="POST">
+        <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="titulo" placeholder="Título" required>
+                    <input type="text" class="form-control" name="id_chamado" value="<?php echo $_GET['change_chamado']; ?>" placeholder="Id Chamado" hidden>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="assunto" placeholder="Assunto" required>
+                    <input type="text" class="form-control" name="titulo" value="<?php echo $chamadoRetornado[0]['titulo']; ?>" placeholder="Título" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="date" class="form-control" name="data_cadastro" placeholder="Data Cadastro" required>
+                    <input type="text" class="form-control" name="assunto" value="<?php echo $chamadoRetornado[0]['assunto']; ?>" placeholder="Assunto" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="gravidade" placeholder="Gravidade (1-Alta 2-Média 3-Baixa)" maxlength="1" required>
+                    <input type="text" class="form-control" name="gravidade" value="<?php echo $chamadoRetornado[0]['gravidade']; ?>" placeholder="Gravidade (1-Alta 2-Média 3-Baixa)" maxlength="1" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="fk_usuario_solicitante" value="<?php echo $_SESSION['id'] ?>" hidden>
+                    <input type="text" class="form-control" name="fk_usuario_atendente" value="<?php echo $chamadoRetornado[0]['fk_usuario_atendente']; ?>" placeholder="Atendente" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="fk_usuario_atendente" placeholder="Atendente" required>
+                    <input type="text" class="form-control" name="fk_status" value="<?php echo $chamadoRetornado[0]['fk_status']; ?>" placeholder="Status" required>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control" name="fk_status" placeholder="Status" required>
-                </div>
-            </div>
-            <button class="btn btn-primary" type="submit" name="cadastrar_chamado">Atualizar</button>
+            <button class="btn btn-primary" type="submit" name="alterar_chamado">Atualizar</button>
         </form>
         <div class="row justify-content-center">
             <div class="col mt-3">

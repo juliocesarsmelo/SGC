@@ -43,17 +43,26 @@
         }
 
         // GET ALL - Pegar todos os registros
-        public function getAllChamados($id = null){
-            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE fk_usuario_solicitante = ".$id." OR fk_usuario_atendente = ".$id;
+        public function getAllChamados($valor = null){
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE fk_usuario_solicitante = ".$valor." OR fk_usuario_atendente = ".$valor;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $dadosRetornados;
         }
 
-        // GET single - Pegar registros únicos
-        public function getChamado($valor){
+        // GET single - Pegar registros únicos pelo TITULO
+        public function getChamadoTitulo($valor){
             $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE titulo LIKE '%$valor%' ";
+            $stmt = $this->connection->prepare($sqlQuery);
+            $stmt->execute();
+            $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $dadosRetornados;
+        }
+
+        // GET single - Pegar registros únicos pelo ID
+        public function getChamadoId($id){
+            $sqlQuery = " SELECT * FROM ".$this->db_table." WHERE id_chamado = ".$id;
             $stmt = $this->connection->prepare($sqlQuery);
             $stmt->execute();
             $dadosRetornados = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +71,17 @@
 
         // DELETE - deletar um registro
         public function deleteChamado($valor){
-            $sqlQuery = "DELETE FROM tab_chamado WHERE id_chamado = '$valor'";            
+            $sqlQuery = "DELETE FROM ".$this->db_table." WHERE id_chamado = '$valor'";            
+            $stmt = $this->connection->prepare($sqlQuery);
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
+
+         // UPDATE - alterar um registro
+         public function updateChamado($id_chamado, $titulo, $assunto, $gravidade, $fk_usuario_atendente, $fk_status){
+            $sqlQuery = " UPDATE ".$this->db_table." SET titulo = '".$titulo."' ,assunto = '".$assunto."' ,gravidade = ".$gravidade." ,fk_usuario_atendente = ".$fk_usuario_atendente." ,fk_status = ".$fk_status. " WHERE id_chamado = ".$id_chamado; 
             $stmt = $this->connection->prepare($sqlQuery);
             if($stmt->execute()){
                 return true;

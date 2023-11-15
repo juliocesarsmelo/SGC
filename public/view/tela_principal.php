@@ -24,7 +24,7 @@
 
     if(!empty($_GET['search_chamado'])){
         $dadoPesquisa = $_GET['search_chamado'];
-        $chamadosRetornados = $chamado->getChamado($dadoPesquisa);
+        $chamadosRetornados = $chamado->getChamadoTitulo($dadoPesquisa);
     }else{
         $chamadosRetornados = $chamado->getAllChamados($_SESSION['id']);
     }
@@ -120,9 +120,9 @@
                                 echo "<td>".$valor['assunto']."</td>";
                                 echo "<td>".$valor['data_cadastro']."</td>";
                                 echo "<td>".$valor['gravidade']."</td>";
-                                echo "<td> Julio Cesar</td>";
-                                echo "<td> Nome Teste</td>";
-                                echo "<td> Criado</td>";
+                                echo "<td>".$valor['fk_usuario_solicitante']."</td>";
+                                echo "<td>".$valor['fk_usuario_atendente']."</td>";
+                                echo "<td>".$valor['fk_status']."</td>";
                                 echo "<td><button id='delete_chamado' onclick=\"deleteChamado('". $valor['id_chamado'] ."');\" class='btn btn-danger'>X</button></td>";
                                 echo "<td><button id='change_chamado' onclick=\"changeChamado('". $valor['id_chamado'] ."');\" class='btn btn-warning'>☼</button></td>";
                                 echo "</tr>";
